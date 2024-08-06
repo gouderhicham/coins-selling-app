@@ -1,18 +1,38 @@
-import { StyleSheet, Text, View } from "react-native";
+import { View, Text } from "react-native";
 import React from "react";
-import { Stack } from "expo-router";
-const Layout = () => {
+import { Tabs } from "expo-router";
+import TabBar from "../components/TabBar";
+
+const _layout = () => {
   return (
-    <View>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerTitle: "index" }} />
-        <Stack.Screen name="users" options={{ headerTitle: "index" }} />
-        <Stack.Screen name="posts" options={{ headerTitle: "index" }} />
-      </Stack>
-    </View>
+    <Tabs tabBar={(props) => <TabBar {...props} />}>
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Home",
+        }}
+      />
+
+      <Tabs.Screen
+        name="create"
+        options={{
+          title: "Create",
+        }}
+      />
+      <Tabs.Screen
+        name="notifications"
+        options={{
+          title: "notification",
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+        }}
+      />
+    </Tabs>
   );
 };
 
-export default Layout;
-
-const styles = StyleSheet.create({});
+export default _layout;
