@@ -1,6 +1,6 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import React, { useRef, useCallback, useState } from "react";
-import { Tabs } from "expo-router";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useRef, useCallback, useState } from "react";
+import Tabs from "expo-router/tabs";
 import { Animated, Easing } from "react-native";
 
 const tabIndexMap = { index: 0, post: 1, notifications: 2, profile: 3 };
@@ -43,13 +43,13 @@ const TabsLayout = () => {
       {
         scale: animations[tabName].interpolate({
           inputRange: [0, 1],
-          outputRange: [1, 1.4], // Scale up only the focused tab
+          outputRange: [1, 1.5], // Scale up only the focused tab
         }),
       },
       {
         translateY: animations[tabName].interpolate({
           inputRange: [0, 1],
-          outputRange: [0, 3], // Move up only the focused tab
+          outputRange: [0, 5], // Move up only the focused tab
         }),
       },
     ],
@@ -80,19 +80,24 @@ const TabsLayout = () => {
                 index: "home",
                 post: "plus-circle",
                 notifications: "bell",
-                profile: "user",
+                // notifications: "bell-badge", on notifications
+                profile: "account",
               }[tabName];
 
               return (
                 <Animated.View style={getAnimatedStyle(tabName)}>
-                  <FontAwesome name={iconName} size={24} color={color} />
+                  <MaterialCommunityIcons
+                    name={iconName}
+                    size={26}
+                    color={"black"}
+                  />
                 </Animated.View>
               );
             },
             tabBarLabel: () => (
               <Animated.Text
                 style={[
-                  { fontSize: 12, color: "#8E8E93" },
+                  { fontSize: 12, color: "black" },
                   getAnimatedTextStyle(tabName),
                 ]}
               >
