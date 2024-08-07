@@ -1,38 +1,26 @@
-import { View, Text } from "react-native";
 import React from "react";
-import { Tabs } from "expo-router";
-import TabBar from "../components/TabBar";
+import { Stack } from "expo-router";
 
-const _layout = () => {
+const Layout = () => {
   return (
-    <Tabs tabBar={(props) => <TabBar {...props} />}>
-      <Tabs.Screen
-        name="index"
+    <Stack
+      screenOptions={{
+        animation: "slide_from_left",
+      }}
+    >
+      <Stack.Screen
         options={{
-          title: "Home",
+          headerShown: false,
         }}
+        name="(tabs_pages)"
       />
-
-      <Tabs.Screen
-        name="create"
+      <Stack.Screen
         options={{
-          title: "Create",
         }}
+        name="users/[id]"
       />
-      <Tabs.Screen
-        name="notifications"
-        options={{
-          title: "notification",
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Profile",
-        }}
-      />
-    </Tabs>
+    </Stack>
   );
 };
 
-export default _layout;
+export default Layout;
