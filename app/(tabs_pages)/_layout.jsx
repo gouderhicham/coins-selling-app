@@ -67,13 +67,14 @@ const TabsLayout = () => {
       screenOptions={{
         tabBarStyle: { height: 60 },
         tabBarItemStyle: { paddingVertical: 7 },
+        tabBarActiveTintColor : "black"
       }}
     >
       {Object.entries(tabIndexMap).map(([tabName, index]) => (
         <Tabs.Screen
           key={tabName}
           name={tabName}
-          options={{
+          options={{ 
             title: tabName.charAt(0).toUpperCase() + tabName.slice(1),
             tabBarIcon: ({ color }) => {
               const iconName = {
