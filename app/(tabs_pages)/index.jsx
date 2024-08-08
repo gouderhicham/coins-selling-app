@@ -24,8 +24,8 @@ const index = () => {
         >
           <Text>go to users 2</Text>
         </Pressable>
-        <Post profileLink={1} sellBuy={"Sell"} />
-        <Post profileLink={2} sellBuy={"Buy"}/>
+        <Post profileLink={1} sellBuy={"sell"} />
+        <Post profileLink={2} sellBuy={"buy"}/>
       </Animated.ScrollView>
     </View>
   );

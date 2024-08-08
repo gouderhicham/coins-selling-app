@@ -51,10 +51,10 @@ const Profile = ({
       <View style>
         <Text style={{ fontSize: 16 }}>
           {" "}
-          - nigger user wants to buy eur for price of :
+          {"   "}- nigger user wants to buy eur for price of :
         </Text>
-        <Text style={{ fontSize: 16 }}> - 1 Eur = 230 DA</Text>
-        <Text style={{ fontSize: 16 }}> - Max Amount: 56000 DA </Text>
+        <Text style={{ fontSize: 16 }}> {"   "}- 1 Eur = 230 DA</Text>
+        <Text style={{ fontSize: 16 }}> {"   "}- Max Amount: 56000 DA </Text>
       </View>
 
       <View
@@ -66,19 +66,19 @@ const Profile = ({
       >
         <TouchableOpacity
           style={{
-            backgroundColor: "#f77f7f",
+            backgroundColor: sellBuy === "sell" ? "#f77f7f" : "#acfda8",
             width: "50%",
             alignItems: "center",
             padding: 10,
-            borderRightColor: "black",
             borderRightWidth: 1,
           }}
         >
-          <Text>{sellBuy}</Text>
+          <Text>{sellBuy.charAt(0).toUpperCase() + sellBuy.slice(1)}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={{
-            backgroundColor: "#acfda8",
+            backgroundColor: "#cccbcb",
+            // backgroundColor: "#acfda8",
             width: "50%",
             alignItems: "center",
             padding: 10,
