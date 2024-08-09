@@ -3,13 +3,14 @@ import { Link, router } from "expo-router";
 import Post from "../../components/Post";
 import { useRef } from "react";
 import { Animated, ScrollView } from "react-native";
+import TabButton from "../../components/TabButton"
 const index = () => {
   const scrollA = useRef(new Animated.Value(0)).current;
   return (
     <View>
       <Animated.ScrollView
-      scrollEventThrottle={10}
-      showsVerticalScrollIndicator = {false}
+        scrollEventThrottle={10}
+        showsVerticalScrollIndicator={false}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollA } } }],
           { useNativeDriver: true }
@@ -24,8 +25,9 @@ const index = () => {
         >
           <Text>go to users 2</Text>
         </Pressable>
-        <Post profileLink={1} sellBuy={"sell"} />
-        <Post profileLink={2} sellBuy={"buy"}/>
+        {/* <Post profileLink={1} sellBuy={"sell"} />
+        <Post profileLink={2} sellBuy={"buy"}/> */}
+        <TabButton /> 
       </Animated.ScrollView>
     </View>
   );

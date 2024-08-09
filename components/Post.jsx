@@ -23,7 +23,7 @@ const Profile = ({
   return (
     <View style={styles.container}>
       <View style={styles.upperContainer}>
-        <Pressable
+        <TouchableOpacity
           onPress={() => {
             router.push(`/users/${profileLink}`);
           }}
@@ -45,7 +45,7 @@ const Profile = ({
             </View>
             <Text style={styles.date}>10/06/2024 2:43 PM -</Text>
           </View>
-        </Pressable>
+        </TouchableOpacity>
         <View style={styles.right}></View>
       </View>
       <View style>
@@ -70,7 +70,6 @@ const Profile = ({
             width: "50%",
             alignItems: "center",
             padding: 10,
-            borderRightWidth: 1,
           }}
         >
           <Text>{sellBuy.charAt(0).toUpperCase() + sellBuy.slice(1)}</Text>
@@ -79,6 +78,8 @@ const Profile = ({
           style={{
             backgroundColor: "#cccbcb",
             // backgroundColor: "#acfda8",
+            borderLeftWidth: 1,
+            borderLeftColor: "#cccbcb",
             width: "50%",
             alignItems: "center",
             padding: 10,

@@ -1,7 +1,13 @@
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Tabs from "expo-router/tabs";
-import { TouchableOpacity, Text, View } from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+  Easing,
+} from "react-native-reanimated";
 
 const TabsLayout = () => {
   const [focusedTab, setFocusedTab] = useState("index");
@@ -19,14 +25,44 @@ const TabsLayout = () => {
         tabBarStyle: {
           height: 60,
           flexDirection: "row",
-          justifyContent: "space-around", // Evenly spaces the tabs
-          alignItems: "center", // Centers the tabs vertically
+          justifyContent: "space-around",
+          alignItems: "center",
         },
-        tabBarItemStyle: { paddingVertical: 7 },
         tabBarActiveTintColor: "black",
         tabBarButton: (props) => {
           const { onPress } = props;
           const focused = route.name === focusedTab;
+
+          // Shared values for scale and color
+          const scale = useSharedValue(1);
+          const backgroundColor = useSharedValue("hsl(0, 0%, 100%)"); // Initial background color
+
+          const animatedStyles = useAnimatedStyle(() => {
+            return {
+              transform: [{ scale: scale.value }],
+              backgroundColor: backgroundColor.value,
+            };
+          });
+
+          const handlePressIn = useCallback(() => {
+            scale.value = withTiming(0.8, {
+              duration: 100,
+              easing: Easing.out(Easing.ease),
+            });
+            backgroundColor.value = withTiming("hsl(0, 0%, 80%)", {
+              duration: 100,
+            }); // Change color on press
+          }, []);
+
+          const handlePressOut = useCallback(() => {
+            scale.value = withTiming(1, {
+              duration: 300,
+              easing: Easing.out(Easing.ease),
+            });
+            backgroundColor.value = withTiming("hsl(0, 0%, 100%)", {
+              duration: 300,
+            }); // Reset color
+          }, []);
 
           return (
             <TouchableOpacity
@@ -34,12 +70,28 @@ const TabsLayout = () => {
                 setFocusedTab(route.name);
                 onPress();
               }}
+              onPressIn={handlePressIn}
+              onPressOut={handlePressOut}
+              activeOpacity={1} // keeps the opacity unchanged when pressed
               style={{
                 justifyContent: "center",
                 alignItems: "center",
                 flex: 1,
+                overflow: "hidden",
+                paddingTop: 7,
+                paddingBottom: 7,
+                
               }}
             >
+              <Animated.View
+                style={[
+                  {
+                    ...StyleSheet.absoluteFillObject,
+                    backgroundColor: "pink",
+                  },
+                  animatedStyles,
+                ]}
+              />
               <View style={{ alignItems: "center" }}>
                 <MaterialCommunityIcons
                   name={
