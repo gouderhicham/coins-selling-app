@@ -1,12 +1,9 @@
 import { router } from "expo-router";
-import { useState } from "react";
 import {
   View,
   Text,
   Image,
   StyleSheet,
-  Pressable,
-  Button,
   TouchableOpacity,
 } from "react-native";
 
@@ -27,7 +24,6 @@ const Profile = ({
           onPress={() => {
             router.push(`/users/${profileLink}`);
           }}
-          // left
           style={styles.left}
         >
           <Image
@@ -36,13 +32,14 @@ const Profile = ({
           />
           <View style={styles.rightProfileImage}>
             <View style={styles.username}>
-              {/* // title */}
+              {/* // user name */}
               <Text style={styles.usernameText}>nigg user</Text>
               <Image
                 source={require("../assets/images/verified.webp")}
                 style={styles.verifiedImage}
               />
             </View>
+            {/* Date */}
             <Text style={styles.date}>10/06/2024 2:43 PM -</Text>
           </View>
         </TouchableOpacity>
@@ -77,7 +74,6 @@ const Profile = ({
         <TouchableOpacity
           style={{
             backgroundColor: "#cccbcb",
-            // backgroundColor: "#acfda8",
             borderLeftWidth: 1,
             borderLeftColor: "#cccbcb",
             width: "50%",
@@ -96,6 +92,7 @@ const styles = StyleSheet.create({
     paddingTop: 14,
     borderColor: "#C7C7C7",
     borderWidth: 1,
+    //NOTE: remove border width design 
     marginBottom: 10,
     backgroundColor: "#ffffff",
     margin: 13,

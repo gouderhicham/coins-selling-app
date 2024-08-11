@@ -8,6 +8,8 @@ import {
   View,
 } from "react-native";
 
+import { supabase } from "../supabase/supabase-js";
+
 const AnimatedButton = () => {
   const [scaleValue] = useState(new Animated.Value(1)); // initial scale value
 
@@ -38,6 +40,7 @@ const AnimatedButton = () => {
     transform: [{ scale: scaleValue }],
     backgroundColor,
   };
+  
   return (
     <View style={styles.container}>
       <TouchableOpacity

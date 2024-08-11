@@ -1,36 +1,26 @@
-import { View, Text, Pressable, Image } from "react-native";
-import { Link, router } from "expo-router";
-import Post from "../../components/Post";
-import { useRef } from "react";
-import { Animated, ScrollView } from "react-native";
-import TabButton from "../../components/TabButton"
-const index = () => {
-  const scrollA = useRef(new Animated.Value(0)).current;
+import React, { useState, useMemo } from "react";
+import { View, Text } from "react-native";
+import { supabase } from "../../supabase/supabase-js";
+
+export default function App() {
+  const [first, setfirst] = useState([]);
+  useMemo(() => {
+    async function nameme() {
+      let { data: countries, error } = await supabase
+        .from("users")
+        .select("*")
+        .range(0, 10);
+
+      setfirst((prev) => countries);
+    }
+    nameme();
+  }, []);
+  console.log(first);
   return (
-    <View>
-      <Animated.ScrollView
-        scrollEventThrottle={10}
-        showsVerticalScrollIndicator={false}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollA } } }],
-          { useNativeDriver: true }
-        )}
-      >
-        <Text>index page</Text>
-        <Link href={"users/1"}>Go to user 1</Link>
-        <Pressable
-          onPress={() => {
-            router.push("users/2");
-          }}
-        >
-          <Text>go to users 2</Text>
-        </Pressable>
-        {/* <Post profileLink={1} sellBuy={"sell"} />
-        <Post profileLink={2} sellBuy={"buy"}/> */}
-        <TabButton /> 
-      </Animated.ScrollView>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      {first.map((ele) => (
+        <Text>{ele.username}</Text>
+      ))}
     </View>
   );
-};
-
-export default index;
+}
