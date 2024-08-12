@@ -3,23 +3,24 @@ import { View, Text } from "react-native";
 import { supabase } from "../../supabase/supabase-js";
 
 export default function App() {
-  const [first, setfirst] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [user, setuser] = useState("2b9b0b7b-d633-4eed-8007-73433f963d90");
   useMemo(() => {
     async function nameme() {
-      let { data: countries, error } = await supabase
-        .from("users")
-        .select("*")
+      let { data: posts, error } = await supabase
+        .from("posts")
+        .select("*").eq("user_id" , user)
         .range(0, 10);
-
-      setfirst((prev) => countries);
+      setPosts((prev) => posts);
     }
     nameme();
   }, []);
-  console.log(first);
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      {first.map((ele) => (
-        <Text>{ele.username}</Text>
+      {posts.map((ele) => (
+        <>
+          <Text>{ele.description}</Text>
+        </>
       ))}
     </View>
   );
