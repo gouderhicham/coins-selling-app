@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const Profile = ({
+const Post = ({
   // profileImage,
   // userName,
   // buySell,
@@ -15,14 +15,13 @@ const Profile = ({
   // eurPrice,
   // maxAmount,
   sellBuy,
-  profileLink,
 }) => {
   return (
     <View style={styles.container}>
       <View style={styles.upperContainer}>
         <TouchableOpacity
           onPress={() => {
-            router.push(`/users/${profileLink}`);
+            router.push(`/${profileLink}`);
           }}
           style={styles.left}
         >
@@ -81,7 +80,7 @@ const Profile = ({
             padding: 10,
           }}
         >
-          <Text>View Profile</Text>
+          <Text>Save</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -90,13 +89,8 @@ const Profile = ({
 const styles = StyleSheet.create({
   container: {
     paddingTop: 14,
-    borderColor: "#C7C7C7",
-    borderWidth: 1,
-    //NOTE: remove border width design 
     marginBottom: 10,
     backgroundColor: "#ffffff",
-    margin: 13,
-    borderRadius: 15,
     overflow: "hidden",
   },
   upperContainer: {
@@ -142,4 +136,4 @@ const styles = StyleSheet.create({
     color: "gray",
   },
 });
-export default Profile;
+export default Post;

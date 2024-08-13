@@ -1,25 +1,25 @@
 import React, { useState, useCallback } from "react";
 import Tabs from "expo-router/tabs";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-  Easing,
 } from "react-native-reanimated";
+import TabImage from "../../components/Image";
+import HeaderComponent from "../../components/Header";
 
 const TabsLayout = () => {
   const [focusedTab, setFocusedTab] = useState("index");
   const tabScreens = [
     { name: "index", icon: "home", label: "Home" },
-    { name: "post", icon: "plus-circle", label: "Post" },
-    { name: "notifications", icon: "bell", label: "Notifications" },
-    { name: "profile", icon: "account", label: "Profile" },
+    { name: "post", icon: "plus", label: "Post" },
+    { name: "transactions", icon: "transactions", label: "Transactions" },
+    { name: "notifications", icon: "notifications", label: "Notifications" },
   ];
   return (
     <Tabs
-      screenOptions={({ route }) => ({
+      screenOptions={({ route }) => ({ 
         tabBarStyle: {
           height: 58,
           flexDirection: "row",
@@ -80,13 +80,11 @@ const TabsLayout = () => {
                 ]}
               />
               <View style={{ alignItems: "center" }}>
-                <MaterialCommunityIcons
+                <TabImage
                   name={
                     tabScreens.find((tab) => tab.name === route.name)?.icon ||
-                    "circle"
+                    "loading"
                   }
-                  size={26}
-                  color={"black"}
                 />
                 <Text style={{ fontSize: 12, color: "black" }}>
                   {tabScreens.find((tab) => tab.name === route.name)?.label ||
@@ -98,8 +96,16 @@ const TabsLayout = () => {
         },
       })}
     >
-      {tabScreens.map(({ name }) => (
-        <Tabs.Screen key={name} name={name} />
+      {tabScreens.map(({ name, label }) => (
+        <Tabs.Screen
+          key={name}
+          name={name}
+          // initialParams={{ title: label }}
+          options={{
+            headerShown: true, 
+            header: () => <HeaderComponent title={label} />,
+          }}
+        />
       ))}
     </Tabs>
   );

@@ -12,3 +12,24 @@ export function generateUUID() {
   }
   return uuid;
 }
+
+// useMemo(() => {
+//     async function nameme() {
+//       let { data: posts, error } = await supabase
+//         .from("posts_for_index_page")
+//         .select("*");
+//       setPosts((prev) => posts);
+//     }
+//     nameme();
+//   }, []);
+
+// useMemo(() => {
+//   async function nameme() {
+//     let { data: posts, error } = await supabase
+//       .from("posts")
+//       .select("*").eq("user_id" , user)
+//       .range(0, 10);
+//     setPosts((prev) => posts);
+//   }
+//   nameme();
+// }, []); 

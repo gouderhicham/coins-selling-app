@@ -3,7 +3,7 @@ import { View, Text } from 'react-native'
 const post = () => {
   return (
     <View>
-      <Text>post</Text>
+      <Text>posting</Text>
     </View>
   )
 }
